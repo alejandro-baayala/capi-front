@@ -9,9 +9,12 @@
     (input)="filterContacts()"
   />
 
+  <a routerLink="/contacts/add" class="btn btn-primary ml-4 bg-green-500 text-white p-3 rounded-md">
+    Add Contact
+  </a>
+
   <div class="self-stretch min-h-[2rem] flex items-center gap-4 justify-end">
     <button [disabled]="!table.getCanPreviousPage()" (click)="table.previousPage()" class="bg-blue-500 p-3 text-white w-[6rem]">Previous</button>
-    <span>Page {{ pagination().pageIndex + 1 }} of {{ table.getPageCount() }}</span>
     <button [disabled]="!table.getCanNextPage()" (click)="table.nextPage()" class="bg-blue-500 p-3 text-white w-[6rem]">Next</button>
   </div>
 
@@ -40,7 +43,7 @@
             >
               <a routerLink="/contacts/{{ cell.row.original.id }}" class="btn btn-info btn-sm self-stretch w-full flex">View</a>
               <a routerLink="/contacts/edit/{{ cell.row.original.id }}" class="btn btn-warning btn-sm self-stretch w-full flex">Edit</a>
-              <button class="btn btn-danger btn-sm cursor-pointer" (click)="deleteContact(cell.row.original.id)">Delete</button>
+              <button class="btn btn-danger btn-sm cursor-pointer" (click)="deleteContact(cell?.row?.original?.id || 0)">Delete</button>
             </ng-container>
             <ng-template #defaultCell>
               <ng-container
@@ -75,7 +78,6 @@
     </table>
     <div class="self-stretch min-h-[2rem] flex items-center gap-4 justify-end mt-4">
       <button [disabled]="!table.getCanPreviousPage()" (click)="table.previousPage()" class="bg-blue-500 p-3 text-white w-[6rem]">Previous</button>
-      <span>Page {{ pagination().pageIndex + 1 }} of {{ table.getPageCount() }}</span>
       <button [disabled]="!table.getCanNextPage()" (click)="table.nextPage()" class="bg-blue-500 p-3 text-white w-[6rem]">Next</button>
     </div>
 </div>

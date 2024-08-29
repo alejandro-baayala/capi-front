@@ -9,6 +9,7 @@ interface PaginatedResponse<T> {
   data: T[];
   last_page: number;
   total: number;
+  per_page: number;
 }
 
 @Injectable({

@@ -88,10 +88,7 @@ export class ContactListComponent implements OnInit {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     pageCount: Math.ceil(this.totalRecords() / this.pagination().pageSize),
-    state: {
-      pagination: this.pagination(),
-    },
-    onPaginationChange: this.handlePaginationChange.bind(this),
+    
   }));
 
   constructor(private contactService: ContactService) { }
@@ -105,15 +102,6 @@ export class ContactListComponent implements OnInit {
       this.contacts.set(response.data);
       this.totalRecords.set(response.total);
     });
-  }
-
-  handlePaginationChange(updaterOrValue: Updater<PaginationState>): void {
-    const newPaginationState = typeof updaterOrValue === 'function'
-      ? updaterOrValue(this.pagination())
-      : updaterOrValue;
-
-    this.pagination.set(newPaginationState);
-    this.loadContacts(newPaginationState.pageIndex + 1);
   }
 
   filterContacts(): void {
