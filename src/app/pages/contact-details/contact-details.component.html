@@ -1,0 +1,42 @@
+<div class="w-10/12 flex flex-col mx-auto ">
+  <h2 class="text-xl font-bold leading-7">Contact Details</h2>
+
+  <div class=" w-full self-stretch">
+    <label class="text-lg font-semibold">First Name: </label>
+    <p>{{ contact?.name }}</p>
+  </div>
+
+  <div class="w-full self-stretch">
+    <label class="text-lg font-semibold">Last Name:</label>
+    <p>{{ contact?.surname }}</p>
+  </div>
+
+  <div class="w-full self-stretch">
+    <label class="text-lg font-semibold">Phone Numbers:</label>
+    <ul>
+      <li *ngFor="let phone of contact?.phones">
+        {{ phone.phone_number }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="w-full self-stretch">
+    <label class="text-lg font-semibold">Email Addresses:</label>
+    <ul>
+      <li *ngFor="let email of contact?.emails">
+        {{ email.email_address }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="w-full self-stretch">
+    <label class="text-lg font-semibold">Addresses:</label>
+    <ul>
+      <li *ngFor="let address of contact?.addresses">
+        <div>Street: {{ address.street }}</div>
+        <div>City: {{ address.city }}</div>
+        <div>Zipcode: {{ address.zipcode }}</div>
+      </li>
+    </ul>
+  </div>
+</div>

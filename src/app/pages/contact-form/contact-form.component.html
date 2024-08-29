@@ -1,0 +1,84 @@
+<div class="w-full flex flex-col self-stretch mx-auto p-7">
+  <h2 class="text-xl font-bold leading-7 w-max">{{ isEditMode ? 'Edit Contact' : 'Add New Contact' }}</h2>
+
+  <form (ngSubmit)="saveContact()" class="flex flex-col gap-3 w-full">
+    <div class="form-group flex- flex-col">
+      <label for="name">First Name</label> <br />
+      <input
+        type="text"
+        id="name"
+        class="form-control border border-gray-400 min-w-[20rem]"
+        [(ngModel)]="contact.name"
+        name="name"
+        required
+      />
+    </div>
+
+    <div class="form-group flex- flex-col">
+      <label for="surname">Last Name</label> <br />
+      <input
+        type="text"
+        id="surname"
+        class="form-control border border-gray-400 min-w-[20rem]"
+        [(ngModel)]="contact.surname"
+        name="surname"
+        required
+      />
+    </div>
+
+    <div class="form-group flex- flex-col">
+      <label for="phone">Phone Numbers</label>
+      <div *ngFor="let phone of contact.phones; let i = index">
+        <input
+          type="text"
+          class="form-control border border-gray-400 mb-2 min-w-[20rem]"
+          [(ngModel)]="contact.phones[i].phone_number"
+          name="phone_{{i}}"
+        />
+      </div>
+    </div>
+
+    <div class="form-group flex- flex-col">
+      <label for="email">Email Addresses</label>
+      <div *ngFor="let email of contact.emails; let i = index">
+        <input
+          type="email"
+          class="form-control border border-gray-400 mb-2 min-w-[20rem]"
+          [(ngModel)]="contact.emails[i].email_address"
+          name="email_{{i}}"
+        />
+      </div>
+    </div>
+
+    <div class="form-group flex- flex-col">
+      <label for="address">Addresses</label>
+      <div *ngFor="let address of contact.addresses; let i = index" class="flex flex-col">
+        <input
+          type="text"
+          class="form-control border border-gray-400 mb-2 max-w-[20rem]"
+          placeholder="Street"
+          [(ngModel)]="contact.addresses[i].street"
+          name="street_{{i}}"
+        />
+        <input
+          type="text"
+          class="form-control border border-gray-400 mb-2 max-w-[20rem]"
+          placeholder="City"
+          [(ngModel)]="contact.addresses[i].city"
+          name="city_{{i}}"
+        />
+        <input
+          type="text"
+          class="form-control border border-gray-400 mb-2 max-w-[20rem]"
+          placeholder="Zipcode"
+          [(ngModel)]="contact.addresses[i].zipcode"
+          name="zipcode_{{i}}"
+        />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary flex justify-start border-2 border-blue-500 p-4 items-center max-w-[10rem] rounded-md bg-blue-500 text-white max-h-[2rem]">
+      {{ isEditMode ? 'Update Contact' : 'Add Contact' }}
+    </button>
+  </form>
+</div>
