@@ -72,13 +72,14 @@ export class ContactListComponent implements OnInit {
         const contact = row?.original as Contact;
         return `
           <ng-container>
-            <a href="/contacts/${contact?.id}" class="btn btn-info btn-sm self-stretch w-full flex">View</a>
-            <a href="/contacts/edit/${contact?.id}" class="btn btn-warning btn-sm self-stretch w-full flex">Edit</a>
+            <a routerLink="/contacts/${contact?.id}" class="btn btn-info btn-sm self-stretch w-full flex">View</a>
+            <a routerLink="/contacts/edit/${contact?.id}" class="btn btn-warning btn-sm self-stretch w-full flex">Edit</a>
             <button class="btn btn-danger btn-sm cursor-pointer" (click)="deleteContact(${contact?.id})">Delete</button>
           </ng-container>
         `;
       },
-    },
+    }
+
   ];
 
   table = createAngularTable(() => ({
@@ -126,6 +127,17 @@ export class ContactListComponent implements OnInit {
       this.loadContacts(this.pagination().pageIndex + 1);
     }
   }
+
+  deleteContact(contactId: number): void {
+    if (confirm('Are you sure you want to delete this contact?')) {
+      this.contactService.deleteContact(contactId).subscribe(() => {
+        this.loadContacts(this.pagination().pageIndex + 1);
+      }, error => {
+        console.error('Error deleting contact:', error);
+      });
+    }
+  }
+
 
   trackByHeaderGroupId(index: number, group: any): any {
     return group.id;
